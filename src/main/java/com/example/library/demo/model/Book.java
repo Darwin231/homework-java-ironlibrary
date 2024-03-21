@@ -23,6 +23,11 @@ public class Book {
         setQuantity(quantity);
     }
 
+    public Book() {
+
+    }
+
+
     //Getters & Setters
     public String getIsbn() {
         return isbn;
