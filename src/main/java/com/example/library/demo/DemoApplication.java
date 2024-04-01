@@ -1,7 +1,10 @@
 package com.example.library.demo;
 import com.example.library.demo.model.Book;
+import com.example.library.demo.model.Student;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.List;
 import java.util.Scanner;
 
 @SpringBootApplication
@@ -27,6 +30,30 @@ public class DemoApplication {
 		book.setCategory(category);
 		book.setQuantity(quantity);
 		System.out.println("Book added successfully!");
+	}
+	public static void listBooksByUSN(String usn) {
+		// Retrieve the student object using the provided USN
+		Student student = getStudentByUSN(usn); // Implement this method to get the student object by USN
+
+		// Check if the student exists
+		if (student != null) {
+			// Retrieve the list of books issued to the student
+			List<Book> issuedBooks = student.getIssuedBooks();
+			// Check if the student has any issued books
+			if (!issuedBooks.isEmpty()) {
+				// Print the table header
+				System.out.println("Book Title\tStudent Name\tReturn Date");
+				// Iterate over each issued book and print its details
+				for (Book book : issuedBooks) {
+					String returnDate = getReturnDateForBook(book); // Implement this method to get the return date for an issued book
+					System.out.printf("%s\t%s\t%s%n", book.getTitle(), student.getName(), returnDate);
+				}
+			} else {
+				System.out.println("This student hasn't issued any books.");
+			}
+		} else {
+			System.out.println("No student found with the provided USN.");
+		}
 	}
 
 	public static void executeCommand() {
@@ -66,6 +93,9 @@ public class DemoApplication {
 				break;
 			case 7:
 				// Call listBooksByUsn method
+				System.out.println("Enter USN:");
+				String usn = scanner.nextLine();
+				listBooksByUSN(usn);
 				break;
 			case 8:
 				System.out.println("Exiting program.");
