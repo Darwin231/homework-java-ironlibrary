@@ -4,13 +4,20 @@ import com.example.library.demo.model.Student;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
 @SpringBootApplication
 public class DemoApplication {
 	private static Scanner scanner = new Scanner(System.in);
+
+	private static HashMap<String, Book> bookList = new HashMap<>();
+
+
 	public static void addBook(Book book) {
+
+
 		System.out.println("Enter isbn : ");
 		String isbn = scanner.nextLine();
 		System.out.println("Enter title : ");
@@ -30,7 +37,10 @@ public class DemoApplication {
 		book.setCategory(category);
 		book.setQuantity(quantity);
 		System.out.println("Book added successfully!");
+
+		bookList.put(authorName, book);
 	}
+
 	public static void listBooksByUSN(String usn) {
 		// Retrieve the student object using the provided USN
 		Student student = getStudentByUSN(usn); // Implement this method to get the student object by USN
@@ -57,6 +67,7 @@ public class DemoApplication {
 	}
 
 	public static void executeCommand() {
+
 		int choice = 0;
 		do {
 			System.out.println("Menu:");
@@ -83,11 +94,29 @@ public class DemoApplication {
 				// Call searchBookByCategory method
 				break;
 			case 4:
-				// Call searchBookByAuthor method
+				System.out.println("Which author do you want to read? (Type the id): \n");
+				bookList.forEach((key,value) -> {
+					System.out.println(key);
+				});
+				try{
+					String authorName = scanner.next();
+					if(bookList.containsKey(authorName)){
+						System.out.println(bookList.containsKey(authorName));
+					}else{
+						System.err.println("The author introduced does not exist");
+					}
+				}catch(IllegalArgumentException iae){
+					System.err.println("The option introduced is not correct");
+				}
 				break;
+
 			case 5:
-				// Call listAllBooks method
+				System.out.println("All books and authors: \n");
+				bookList.forEach((key,value) -> {
+					System.out.println(key + ": " +  value.getTitle());
+				});
 				break;
+
 			case 6:
 				// Call issueBookToStudent method
 				break;
