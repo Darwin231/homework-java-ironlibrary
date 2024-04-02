@@ -10,7 +10,11 @@ public class Issue {
     private Integer issueId;
     private String issueDate;
     private String returnDate;
+    @ManyToOne
+    @JoinColumn(name = "student_id")
     private Student issueStudent;
+    @ManyToOne
+    @JoinColumn(name = "book_isbn")
     private Book issueBook;
 
     public Issue(String issueDate, String returnDate, Student issueStudent, Book issueBook) {

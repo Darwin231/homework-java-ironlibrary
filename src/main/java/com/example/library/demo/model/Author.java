@@ -10,6 +10,8 @@ public class Author {
     private Integer authorId;
     private String name;
     private String email;
+    @ManyToOne
+    @JoinColumn(name = "book_isbn")
     private Book authorBook;
 
     public Author(String name, String email, Book authorBook) {
