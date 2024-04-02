@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.BitSet;
+import java.util.List;
 
 @Entity
 @Table(name = "student")
@@ -14,6 +15,8 @@ public class Student {
     private String name;
 
     private ArrayList issuedBook = new ArrayList<>();
+    @OneToMany(mappedBy = "student")
+    private List<Issue> issues;
 
     public Student(String name) {
         this.name = name;

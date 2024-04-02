@@ -15,6 +15,9 @@ public class Book {
     @Column(name = "quantity")
     private Integer quantity;
 
+    @OneToOne
+    private Author author;
+
     //Parametrized constructor
     public Book(String isbn, String title, String category, Integer quantity) {
         setIsbn(isbn);
