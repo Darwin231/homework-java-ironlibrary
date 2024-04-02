@@ -86,15 +86,44 @@ public class DemoApplication {
 
 		switch (choice) {
 			case 1:
-				addBook(new Book()); // Call addBook method
+				// Add a book
+				addBook(new Book());
 				break;
 			case 2:
-				// Call searchBookByTitle method
+				// Search book by title
+				System.out.println("Which book do you want to search? (Type the title): \n");
+				bookList.forEach((key,value) -> {
+					System.out.println(value.getTitle());
+				});
+				try{
+					String bookTitle = scanner.next();
+					if(bookList.containsKey(bookTitle)){
+						System.out.println(bookList.containsKey(bookTitle));
+					}else{
+						System.err.println("The book introduced does not exist");
+					}
+				}catch(IllegalArgumentException iae){
+					System.err.println("The title introduced is not correct");
+				}
 				break;
 
 			case 3:
-				// Call searchBookByCategory method
-				break;
+				// Search book by category
+				System.out.println("Which category do you want to search? (Type the category): \n");
+				bookList.forEach((key,value) -> {
+					System.out.println(value.getCategory());
+				});
+				String category = scanner.next();
+				boolean categoryFound = false;
+				for (Book book : bookList.values()) {
+					if (book.getCategory().equalsIgnoreCase(category)) {
+						categoryFound = true;
+						System.out.println("Book found in category: " + book.getTitle());
+					}
+				}
+				if (!categoryFound) {
+					System.err.println("No books found in the specified category.");
+				}
 
 			case 4:
 				// List Book per Author
