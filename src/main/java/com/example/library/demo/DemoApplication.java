@@ -15,7 +15,7 @@ public class DemoApplication {
 	private static HashMap<String, Book> bookList = new HashMap<>();
 
 
-	public static void addBook(Book book) {
+	public static Book addBook(Book book) {
 
 
 		System.out.println("Enter isbn : ");
@@ -39,6 +39,7 @@ public class DemoApplication {
 		System.out.println("Book added successfully!");
 
 		bookList.put(authorName, book);
+		return book;
 	}
 
 	public static void listBooksByUSN(String usn) {
@@ -90,10 +91,13 @@ public class DemoApplication {
 			case 2:
 				// Call searchBookByTitle method
 				break;
+
 			case 3:
 				// Call searchBookByCategory method
 				break;
+
 			case 4:
+				// List Book per Author
 				System.out.println("Which author do you want to read? (Type the id): \n");
 				bookList.forEach((key,value) -> {
 					System.out.println(key);
@@ -111,6 +115,7 @@ public class DemoApplication {
 				break;
 
 			case 5:
+				// Show all books
 				System.out.println("All books and authors: \n");
 				bookList.forEach((key,value) -> {
 					System.out.println(key + ": " +  value.getTitle());
@@ -119,16 +124,27 @@ public class DemoApplication {
 
 			case 6:
 				// Call issueBookToStudent method
+				System.out.println("What is the name of the student?: \n");
+				String studentName = scanner.nextLine();
+
+				Student student = new Student(studentName);
+
+				student.addBook(addBook(new Book()));
+
+
 				break;
+
 			case 7:
 				// Call listBooksByUsn method
 				System.out.println("Enter USN:");
 				String usn = scanner.nextLine();
 				listBooksByUSN(usn);
 				break;
+
 			case 8:
 				System.out.println("Exiting program.");
 				break;
+
 			default:
 				System.out.println("Invalid choice. Please enter a valid option.");
 				break;
