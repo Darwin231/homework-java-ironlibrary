@@ -2,6 +2,8 @@ package com.example.library.demo.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.List;
 
 @Entity
@@ -12,10 +14,11 @@ public class Student {
     private String usn;
     private String name;
 
+    private ArrayList issuedBook = new ArrayList<>();
     @OneToMany(mappedBy = "student")
     private List<Issue> issues;
 
-    public Student(String usn, String name) {
+    public Student(String name) {
         this.name = name;
     }
 
@@ -33,5 +36,17 @@ public class Student {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public ArrayList getIssuedBook() {
+        return issuedBook;
+    }
+
+    public void setIssuedBook(ArrayList issuedBook) {
+        this.issuedBook = issuedBook;
+    }
+
+    public void addBook(Book book){
+        issuedBook.add(book);
     }
 }
