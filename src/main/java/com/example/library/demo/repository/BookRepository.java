@@ -12,9 +12,12 @@ import java.util.Objects;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, String> {
+    Optional<List<Book>> findAllByTitle(String title);
+    Optional<List<Book>> findAllByCategory(String category);
 
 
     @Query("SELECT b FROM Book b WHERE b.Book.Author= :Author")
@@ -24,9 +27,4 @@ public interface BookRepository extends JpaRepository<Book, String> {
 
     @Query("SELECT b FROM Book b WHERE b.Book.Student= :Student")
     List<Book> findAllByUsn(@Param("Student") String student);
-
-
-    List<Book> findAllByTitle(String title);
-    List<Book> findAllByCategory(String category);
-
 }
