@@ -13,10 +13,11 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String usn;
     private String name;
-
     private ArrayList issuedBook = new ArrayList<>();
+
     @OneToMany(mappedBy = "student")
-    private List<Issue> issues;
+    private List<Issue> issues = new ArrayList<>();
+
 
     public Student(String name) {
         this.name = name;
