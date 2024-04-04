@@ -2,22 +2,25 @@ package com.example.library.demo.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+
 @Entity
 @Table(name = "author")
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer authorId;
+
+
     private String name;
     private String email;
-    @ManyToOne
+    @OneToMany
     @JoinColumn(name = "book_isbn")
-    private Book authorBook;
+    private ArrayList<Book> authorBook = new ArrayList<>();
 
     public Author(String name, String email, Book authorBook) {
         setName(name);
-        setEmail(email);
-        setAuthorBook(authorBook);
+        setEmail(email);;
     }
 
     public Integer getAuthorId() {
@@ -42,14 +45,6 @@ public class Author {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Book getAuthorBook() {
-        return authorBook;
-    }
-
-    public void setAuthorBook(Book authorBook) {
-        this.authorBook = authorBook;
     }
 
 }

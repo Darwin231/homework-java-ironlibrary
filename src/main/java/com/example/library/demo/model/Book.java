@@ -15,21 +15,26 @@ public class Book {
     @Column(name = "quantity")
     private Integer quantity;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "Author")
     private Author author;
 
+    @OneToOne
+    @JoinColumn(name = "student_usn", referencedColumnName = "usn")
+    private Student student;
+
     //Parametrized constructor
-    public Book(String isbn, String title, String category, Integer quantity) {
+    public Book(String isbn, String title, String category, Integer quantity, Author author) {
         setIsbn(isbn);
         setTitle(title);
         setCategory(category);
         setQuantity(quantity);
+        setAuthor(author);
     }
 
     public Book() {
 
     }
-
 
     //Getters & Setters
     public String getIsbn() {
@@ -74,6 +79,14 @@ public class Book {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
     //toString
