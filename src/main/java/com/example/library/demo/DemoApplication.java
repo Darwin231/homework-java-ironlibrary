@@ -17,8 +17,8 @@ import java.util.Scanner;
 public class DemoApplication {
 	private static Scanner scanner = new Scanner(System.in);
 	@Autowired
-	BookRepository bookRepository;
-	public static void executeCommand(BookRepository bookRepository) {
+	static BookRepository bookRepository;
+	public static void executeCommand() {
 		int choice = 0;
 		do {
 			System.out.println("IronLibrary Menu:");
