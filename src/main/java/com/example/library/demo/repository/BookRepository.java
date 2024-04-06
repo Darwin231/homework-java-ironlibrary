@@ -16,6 +16,8 @@ import java.util.Optional;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, String> {
+    Optional<Book> findByIsbn(String isbn);
+    List<Book> findAll();
     Optional<List<Book>> findAllByTitle(String title);
     Optional<List<Book>> findAllByCategory(String category);
 
@@ -23,7 +25,7 @@ public interface BookRepository extends JpaRepository<Book, String> {
 //    @Query("SELECT b FROM Book b WHERE b.Book.Author= :Author")
 //    List<Book> findAllByAuthor(@Param("Author") String author);
 
-    List<Book> findAll();
+
 
 //    @Query("SELECT b FROM Book b WHERE b.Book.Student= :Student")
 //    List<Book> findAllByUsn(@Param("Student") String student);
