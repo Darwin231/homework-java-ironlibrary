@@ -11,7 +11,7 @@ public class Issue {
     private String issueDate;
     private String returnDate;
     @ManyToOne
-    @JoinColumn(name = "student_id")
+    @JoinColumn(name = "student_id", referencedColumnName = "usn")
     private Student issueStudent;
     @ManyToOne
     @JoinColumn(name = "book_isbn")
