@@ -19,6 +19,13 @@ public class LibraryService {
     @Autowired
     StudentRepository studentRepository;
 
+    public LibraryService(AuthorRepository authorRepository, BookRepository bookRepository, IssueRepository issueRepository, StudentRepository studentRepository) {
+        this.authorRepository = authorRepository;
+        this.bookRepository = bookRepository;
+        this.issueRepository = issueRepository;
+        this.studentRepository = studentRepository;
+    }
+
     // Book Repository
     public void addBook (Book book) {
         Optional<Book> bookOptional = bookRepository.findByIsbn(book.getIsbn());
@@ -33,29 +40,29 @@ public class LibraryService {
         return bookRepository.findAll();
     }
 
-    public Optional<List<Book>> findAllByTitle(String title) {
+    public Optional<List<Book>> findAllBooksByTitle(String title) {
         return bookRepository.findAllByTitle(title);
     }
 
-    public Optional<List<Book>> findAllByCategory(String category) {
+    public Optional<List<Book>> findAllBooksByCategory(String category) {
         return bookRepository.findAllByCategory(category);
     }
 
     // Author Repository
-    public Optional<Author> findByAuthorId(int authorId) {
+    public Optional<Author> findAuthorByAuthorId(int authorId) {
         return authorRepository.findByAuthorId(authorId);
     }
 
-    public Optional<List<Author>> findAllByAuthorName(String name) {
+    public Optional<List<Author>> findAllAuthorsByAuthorName(String name) {
         return authorRepository.findAllByName(name);
     }
 
     // Student Repository
-    public Optional<Student> findByUsn(String usn) {
+    public Optional<Student> findStudentByUsn(String usn) {
         return studentRepository.findByUsn(usn);
     }
 
-    public Optional<List<Student>> findAllByStudentName(String name) {
+    public Optional<List<Student>> findAllStudentsByStudentName(String name) {
         return studentRepository.findAllByName(name);
     }
 

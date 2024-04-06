@@ -10,13 +10,14 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer authorId;
-
-
     private String name;
     private String email;
     @OneToMany
     @JoinColumn(name = "book_isbn")
     private ArrayList<Book> authorBook = new ArrayList<>();
+
+    public Author() {
+    }
 
     public Author(String name, String email) {
         setName(name);

@@ -11,17 +11,18 @@ public class Issue {
     private String issueDate;
     private String returnDate;
     @ManyToOne
-    @JoinColumn(name = "student_id", referencedColumnName = "usn")
+    @JoinColumn(name = "issue_student")
     private Student issueStudent;
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "book_isbn")
     private Book issueBook;
 
-    public Issue(String issueDate, String returnDate, Student issueStudent, Book issueBook) {
+    public Issue() {
+    }
+
+    public Issue(String issueDate, String returnDate) {
         setIssueDate(issueDate);
         setReturnDate(returnDate);
-        setIssueStudent(issueStudent);
-        setIssueBook(issueBook);
     }
 
     public Integer getIssueId() {
