@@ -39,13 +39,13 @@ class BookRepositoryTest {
     }
     @Test
     void findAllByTitle() {
-        List<Book> bookOptional = bookRepository.findAllByTitle("The Notebook");
-        assertEquals(1,bookOptional.size());
+        Optional<List<Book>> bookOptional = bookRepository.findAllByTitle("The Notebook");
+        assertEquals(1,bookOptional.get().size());
     }
 
     @Test
     void findAllByCategory() {
-        List<Book> bookOptional = bookRepository.findAllByCategory("Romance");
-        assertEquals(1,bookOptional.size());
+        Optional<List<Book>> bookOptional = bookRepository.findAllByCategory("Romance");
+        assertEquals(1,bookOptional.get().size());
     }
 }
