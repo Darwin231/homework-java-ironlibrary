@@ -18,7 +18,7 @@ public class Author {
     @JoinColumn(name = "book_isbn")
     private ArrayList<Book> authorBook = new ArrayList<>();
 
-    public Author(String name, String email, Book authorBook) {
+    public Author(String name, String email) {
         setName(name);
         setEmail(email);;
     }
