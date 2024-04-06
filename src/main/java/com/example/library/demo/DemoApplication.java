@@ -88,7 +88,12 @@ public class DemoApplication {
 					}
 					break;
 				case 4:
-					// Call searchBookByAuthor method
+					System.out.println("Enter author name to display their books: ");
+					String authorNameSearch = scanner.nextLine();
+
+					// we should first create the Author object using findbyauthorname and then use
+					// bookRepository.findAllByAuthor(author); passing the object as argument
+
 					break;
 				case 5:
 					// Call listAllBooks method
