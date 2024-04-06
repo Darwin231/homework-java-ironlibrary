@@ -96,7 +96,11 @@ public class DemoApplication {
 
 					break;
 				case 5:
-					// Call listAllBooks method
+					System.out.println("Books list: ");
+					List<Book> allBooks = bookRepository.findAll();
+					for (Book book : allBooks) {
+						System.out.println(book.toString()); // REVIEW IF THIS PRINT IS IN THE DESIRED FORMAT
+					}
 					break;
 				case 6:
 					// Call issueBookToStudent method
