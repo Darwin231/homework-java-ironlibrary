@@ -75,7 +75,17 @@ public class DemoApplication {
 					}
 					break;
 				case 3:
-					// Call searchBookByCategory method
+					System.out.println("Enter the category of books to search: ");
+					String bookCategorySearch = scanner.nextLine();
+					Optional<List<Book>> optionalBookList2 = bookRepository.findAllByCategory(bookCategorySearch);
+					if (optionalBookList2.isPresent()) {
+						List<Book> bookList = optionalBookList2.get();
+						for (Book book : bookList) {
+							System.out.println(book.toString()); // REVIEW IF THIS PRINT IS IN THE DESIRED FORMAT
+						}
+					} else {
+						System.out.println("No books found for category " + bookCategorySearch);
+					}
 					break;
 				case 4:
 					// Call searchBookByAuthor method
