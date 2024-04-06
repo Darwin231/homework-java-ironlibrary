@@ -9,6 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.sound.midi.Soundbank;
 import java.sql.SQLOutput;
+import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 @SpringBootApplication
@@ -60,7 +62,17 @@ public class DemoApplication {
 
 					break;
 				case 2:
-					// Call searchBookByTitle method
+					System.out.println("Enter the title of the book to search: ");
+					String bookTitleSearch = scanner.nextLine();
+					Optional<List<Book>> optionalBookList = bookRepository.findAllByTitle(bookTitleSearch);
+					if (optionalBookList.isPresent()) {
+						List<Book> bookList = optionalBookList.get();
+						for (Book book : bookList) {
+							System.out.println(book.toString()); // REVIEW IF THIS PRINT IS IN THE DESIRED FORMAT
+						}
+					} else {
+						System.out.println("Book with title " + bookTitleSearch + " not found.");
+					}
 					break;
 				case 3:
 					// Call searchBookByCategory method
