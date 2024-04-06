@@ -15,7 +15,7 @@ public class Student {
     private String name;
     private ArrayList issuedBook = new ArrayList<>();
 
-    @OneToMany(mappedBy = "student")
+    @OneToMany(mappedBy = "issueStudent")
     private List<Issue> issues = new ArrayList<>();
 
 
