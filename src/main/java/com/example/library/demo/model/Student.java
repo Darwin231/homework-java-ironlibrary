@@ -3,7 +3,6 @@ package com.example.library.demo.model;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
-import java.util.BitSet;
 import java.util.List;
 
 @Entity
@@ -13,41 +12,38 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String usn;
     private String name;
-    private ArrayList issuedBook = new ArrayList<>();
 
-    @OneToMany(mappedBy = "issueStudent")
+    @OneToMany(mappedBy = "issueStudent", cascade = CascadeType.ALL)
     private List<Issue> issues = new ArrayList<>();
 
+    public Student() {
+    }
 
     public Student(String name) {
         this.name = name;
-    }
-
-    public String getUsn() {
-        return usn;
     }
 
     public void setUsn(String usn) {
         this.usn = usn;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
 
-    public ArrayList getIssuedBook() {
-        return issuedBook;
+    public void setIssues(List<Issue> issues) {
+        this.issues = issues;
     }
 
-    public void setIssuedBook(ArrayList issuedBook) {
-        this.issuedBook = issuedBook;
+    public String getUsn() {
+        return usn;
     }
 
-    public void addBook(Book book){
-        issuedBook.add(book);
+    public String getName() {
+        return name;
+    }
+
+    public List<Issue> getIssues() {
+        return issues;
     }
 }

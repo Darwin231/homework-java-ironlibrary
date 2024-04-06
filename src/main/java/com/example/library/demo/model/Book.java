@@ -33,7 +33,6 @@ public class Book {
     }
 
     public Book() {
-
     }
 
     //Getters & Setters
