@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface AuthorRepository extends JpaRepository<Author, String> {
+public interface AuthorRepository extends JpaRepository<Author, Integer> {
     Optional<Author> findByAuthorId(int authorId);
     Optional<List<Author>> findAllByName(String name);
 }
