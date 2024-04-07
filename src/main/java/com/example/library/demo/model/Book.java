@@ -92,5 +92,9 @@ public class Book {
                 ", quantity=" + quantity +
                 '}';
     }
+
+    public void printBookInfo() {
+        System.out.printf("%-20s %-20s %-10s %-20s %-20s\n", isbn, title, category, quantity, author.getName(), author.getEmail());
+    }
 }
 
