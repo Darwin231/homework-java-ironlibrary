@@ -16,6 +16,9 @@ public class Author {
     @Column(name = "author_mail")
     private String email;
 
+    @OneToMany(mappedBy = "author")
+    private List<Book> bookList = new ArrayList<>();
+
     public Author() {
     }
 
