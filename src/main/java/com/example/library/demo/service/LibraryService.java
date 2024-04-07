@@ -48,13 +48,21 @@ public class LibraryService {
         return bookRepository.findAllByCategory(category);
     }
 
+    public Optional<Book> findBookByIsbn(String isbn) {
+        return bookRepository.findByIsbn(isbn);
+    }
+
     // Author Repository
+    public void addAuthor (Author author) {
+        authorRepository.save(author);
+    }
+
     public Optional<Author> findAuthorByAuthorId(int authorId) {
         return authorRepository.findByAuthorId(authorId);
     }
 
-    public Optional<List<Author>> findAllAuthorsByAuthorName(String name) {
-        return authorRepository.findAllByName(name);
+    public Optional<Author> findAuthorByName(String name) {
+        return authorRepository.findByName(name);
     }
 
     // Student Repository
