@@ -12,12 +12,15 @@ public class Book {
     private Integer quantity;
 
     @ManyToOne
-    @JoinColumn(name = "author_id")
+    @JoinColumn(name = "author_name")
     private Author author;
+
+    @OneToOne(mappedBy = "issueBook")
+    private Issue issue;
 
 
     //Parametrized constructor
-    public Book(String isbn, String title, String category, Integer quantity, Author author) {
+    public Book(String isbn, String title, String category, Integer quantity) {
         setIsbn(isbn);
         setTitle(title);
         setCategory(category);

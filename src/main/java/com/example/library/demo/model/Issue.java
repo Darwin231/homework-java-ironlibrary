@@ -18,6 +18,8 @@ public class Issue {
     @JoinColumn(name = "book_isbn", referencedColumnName = "isbn")
     private Book issueBook;
 
+
+
     public Issue() {
     }
 
