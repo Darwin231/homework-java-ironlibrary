@@ -15,15 +15,14 @@ public class Book {
     @JoinColumn(name = "author_id")
     private Author author;
 
-    @OneToOne(mappedBy = "book")
-    private Issue issue;
 
     //Parametrized constructor
-    public Book(String isbn, String title, String category, Integer quantity) {
+    public Book(String isbn, String title, String category, Integer quantity, Author author) {
         setIsbn(isbn);
         setTitle(title);
         setCategory(category);
         setQuantity(quantity);
+        setAuthor(author);
     }
 
     public Book() {
@@ -78,6 +77,9 @@ public class Book {
         return author;
     }
 
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
 
     //toString
 

@@ -14,7 +14,7 @@ public class Student {
     @Column(name = "student_name")
     private String name;
 
-    @OneToMany(mappedBy = "student")
+    @OneToMany(mappedBy = "issueStudent", orphanRemoval = true)
     private List<Issue> issues = new ArrayList<>();
 
     public Student() {

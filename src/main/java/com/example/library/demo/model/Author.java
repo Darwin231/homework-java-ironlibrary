@@ -15,15 +15,13 @@ public class Author {
     private String name;
     @Column(name = "author_mail")
     private String email;
-    @OneToMany(mappedBy = "author")
-    private List<Book> authorBook = new ArrayList<>();
 
     public Author() {
     }
 
     public Author(String name, String email) {
         setName(name);
-        setEmail(email);;
+        setEmail(email);
     }
 
     public Integer getAuthorId() {
