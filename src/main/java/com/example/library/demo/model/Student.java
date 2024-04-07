@@ -11,9 +11,10 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String usn;
+    @Column(name = "student_name")
     private String name;
 
-    @OneToMany(mappedBy = "issueStudent", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "student")
     private List<Issue> issues = new ArrayList<>();
 
     public Student() {

@@ -3,6 +3,7 @@ package com.example.library.demo.model;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "author")
@@ -10,11 +11,12 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer authorId;
+    @Column(name = "author_name")
     private String name;
+    @Column(name = "author_mail")
     private String email;
-    @OneToMany
-    @JoinColumn(name = "book_isbn")
-    private ArrayList<Book> authorBook = new ArrayList<>();
+    @OneToMany(mappedBy = "author")
+    private List<Book> authorBook = new ArrayList<>();
 
     public Author() {
     }

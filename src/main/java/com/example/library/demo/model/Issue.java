@@ -6,16 +6,21 @@ import jakarta.persistence.*;
 @Table(name = "issue")
 public class Issue {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer issueId;
+
+    @Column(name = "issue_date")
     private String issueDate;
+
+    @Column(name = "return_date")
     private String returnDate;
+
     @ManyToOne
-    @JoinColumn(name = "issue_student")
-    private Student issueStudent;
+    @JoinColumn(name = "student_name")
+    private Student student;
     @OneToOne
-    @JoinColumn(name = "book_isbn")
-    private Book issueBook;
+    @JoinColumn(name = "isbn")
+    private Book book;
 
     public Issue() {
     }
@@ -50,18 +55,18 @@ public class Issue {
     }
 
     public Student getIssueStudent() {
-        return issueStudent;
+        return student;
     }
 
-    public void setIssueStudent(Student issueStudent) {
-        this.issueStudent = issueStudent;
+    public void setIssueStudent(Student student) {
+        this.student = student;
     }
 
     public Book getIssueBook() {
-        return issueBook;
+        return book;
     }
 
     public void setIssueBook(Book issueBook) {
-        this.issueBook = issueBook;
+        this.book = book;
     }
 }

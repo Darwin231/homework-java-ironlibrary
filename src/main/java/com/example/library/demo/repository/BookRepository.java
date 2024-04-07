@@ -2,6 +2,7 @@ package com.example.library.demo.repository;
 
 import com.example.library.demo.model.Author;
 import com.example.library.demo.model.Book;
+import com.example.library.demo.model.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -21,12 +22,11 @@ public interface BookRepository extends JpaRepository<Book, String> {
     Optional<List<Book>> findAllByTitle(String title);
     Optional<List<Book>> findAllByCategory(String category);
 
-
-//    @Query("SELECT b FROM Book b WHERE b.Book.Author= :Author")
-//    List<Book> findAllByAuthor(@Param("Author") String author);
-
+    @Query("SELECT b FROM Book b WHERE b.author.authorId= :authorId")
+    List<Book> findAllByAuthor(@Param("authorId") Integer authorId);
 
 
-//    @Query("SELECT b FROM Book b WHERE b.Book.Student= :Student")
-//    List<Book> findAllByUsn(@Param("Student") String student);
+
+    /*@Query("SELECT b FROM Book b WHERE b.student.usn= :studentUsn")
+    List<Book> findAllByUsn(@Param("studentUsn") String studentUsn);*/
 }

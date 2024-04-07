@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 @Table(name = "book")
 public class Book {
     @Id
-    @Column(name = "isbn", unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String isbn;
     @Column(name = "title")
     private String title;
@@ -16,20 +16,18 @@ public class Book {
     private Integer quantity;
 
     @ManyToOne
-    @JoinColumn(name = "Author")
+    @JoinColumn(name = "author_id")
     private Author author;
 
-    @OneToOne
-    @JoinColumn(name = "student_usn", referencedColumnName = "usn")
-    private Student student;
+    @OneToOne(mappedBy = "book")
+    private Issue issue;
 
     //Parametrized constructor
-    public Book(String isbn, String title, String category, Integer quantity, Author author) {
+    public Book(String isbn, String title, String category, Integer quantity) {
         setIsbn(isbn);
         setTitle(title);
         setCategory(category);
         setQuantity(quantity);
-        setAuthor(author);
     }
 
     public Book() {
@@ -84,9 +82,6 @@ public class Book {
         return author;
     }
 
-    public void setAuthor(Author author) {
-        this.author = author;
-    }
 
     //toString
 

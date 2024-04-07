@@ -55,7 +55,7 @@ public class Menu {
                     Author bookAuthor = new Author(authorName,authorEmail);
 
                     // Add book to the repository
-                    Book newBook = new Book(bookIsbn,bookTitle,bookCategory,bookQuantity,bookAuthor);
+                    Book newBook = new Book(bookIsbn,bookTitle,bookCategory,bookQuantity);
                     libraryService.addBook(newBook);
 
                     System.out.println("Book successfully added to IronLibrary.");
