@@ -8,11 +8,7 @@ public class Issue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer issueId;
-
-    @Column(name = "issue_date")
     private String issueDate;
-
-    @Column(name = "return_date")
     private String returnDate;
 
     @ManyToOne

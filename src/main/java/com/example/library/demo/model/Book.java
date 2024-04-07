@@ -7,11 +7,8 @@ import jakarta.persistence.*;
 public class Book {
     @Id
     private String isbn;
-    @Column(name = "title")
     private String title;
-    @Column(name = "category")
     private String category;
-    @Column(name = "quantity")
     private Integer quantity;
 
     @ManyToOne
