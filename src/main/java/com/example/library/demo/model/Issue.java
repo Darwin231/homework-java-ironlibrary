@@ -8,26 +8,25 @@ public class Issue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer issueId;
-
-    @Column(name = "issue_date")
     private String issueDate;
-
-    @Column(name = "return_date")
     private String returnDate;
 
-    @ManyToOne
-    @JoinColumn(name = "student_name")
-    private Student student;
     @OneToOne
-    @JoinColumn(name = "isbn")
-    private Book book;
+    @JoinColumn(name = "student_usn")
+    private Student issueStudent;
+    @OneToOne
+    @JoinColumn(name = "book_isbn")
+    private Book issueBook;
+
 
     public Issue() {
     }
 
-    public Issue(String issueDate, String returnDate) {
+    public Issue(String issueDate, String returnDate, Student student, Book book) {
         setIssueDate(issueDate);
         setReturnDate(returnDate);
+        setIssueStudent(student);
+        setIssueBook(book);
     }
 
     public Integer getIssueId() {
@@ -55,18 +54,18 @@ public class Issue {
     }
 
     public Student getIssueStudent() {
-        return student;
+        return issueStudent;
     }
 
     public void setIssueStudent(Student student) {
-        this.student = student;
+        this.issueStudent = student;
     }
 
     public Book getIssueBook() {
-        return book;
+        return issueBook;
     }
 
     public void setIssueBook(Book issueBook) {
-        this.book = book;
+        this.issueBook = issueBook;
     }
 }

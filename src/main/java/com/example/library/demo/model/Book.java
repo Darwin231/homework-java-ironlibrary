@@ -6,21 +6,10 @@ import jakarta.persistence.*;
 @Table(name = "book")
 public class Book {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String isbn;
-    @Column(name = "title")
     private String title;
-    @Column(name = "category")
     private String category;
-    @Column(name = "quantity")
     private Integer quantity;
-
-    @ManyToOne
-    @JoinColumn(name = "author_id")
-    private Author author;
-
-    @OneToOne(mappedBy = "book")
-    private Issue issue;
 
     //Parametrized constructor
     public Book(String isbn, String title, String category, Integer quantity) {
@@ -78,13 +67,8 @@ public class Book {
         this.quantity = quantity;
     }
 
-    public Author getAuthor() {
-        return author;
-    }
-
 
     //toString
-
     @Override
     public String toString() {
         return "Book{" +

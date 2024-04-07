@@ -66,9 +66,9 @@ public class LibraryService {
         return studentRepository.findAllByName(name);
     }
 
-    public List<Book> findBooksByAuthor(Author author){
-        return bookRepository.findAllByAuthor(author.getAuthorId());
-    }
+//    public List<Book> findBooksByAuthor(Author author){
+//        return bookRepository.findAllByAuthor(author.getAuthorId());
+//    }
 
     /*public List<Book> findByUsn(Student student){
         return bookRepository.findAllByUsn(student.getUsn());

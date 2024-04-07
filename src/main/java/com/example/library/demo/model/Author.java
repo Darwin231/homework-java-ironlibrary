@@ -13,17 +13,19 @@ public class Author {
     private Integer authorId;
     @Column(name = "author_name")
     private String name;
-    @Column(name = "author_mail")
+    @Column(name = "author_email")
     private String email;
-    @OneToMany(mappedBy = "author")
-    private List<Book> authorBook = new ArrayList<>();
+    @OneToOne
+    @JoinColumn(name = "author_book")
+    private Book authorBook;
 
     public Author() {
     }
 
-    public Author(String name, String email) {
+    public Author(String name, String email, Book authorBook) {
         setName(name);
-        setEmail(email);;
+        setEmail(email);
+        setAuthorBook(authorBook);
     }
 
     public Integer getAuthorId() {
@@ -50,4 +52,11 @@ public class Author {
         this.email = email;
     }
 
+    public Book getAuthorBook() {
+        return authorBook;
+    }
+
+    public void setAuthorBook(Book authorBook) {
+        this.authorBook = authorBook;
+    }
 }

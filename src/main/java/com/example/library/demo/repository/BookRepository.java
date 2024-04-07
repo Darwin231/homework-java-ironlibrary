@@ -22,8 +22,8 @@ public interface BookRepository extends JpaRepository<Book, String> {
     Optional<List<Book>> findAllByTitle(String title);
     Optional<List<Book>> findAllByCategory(String category);
 
-    @Query("SELECT b FROM Book b WHERE b.author.authorId= :authorId")
-    List<Book> findAllByAuthor(@Param("authorId") Integer authorId);
+//    @Query("SELECT b FROM Book b WHERE b.author.authorId= :authorId")
+//    List<Book> findAllByAuthor(@Param("authorId") Integer authorId);
 
 
 

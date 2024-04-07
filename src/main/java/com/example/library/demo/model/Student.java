@@ -14,9 +14,6 @@ public class Student {
     @Column(name = "student_name")
     private String name;
 
-    @OneToMany(mappedBy = "student")
-    private List<Issue> issues = new ArrayList<>();
-
     public Student() {
     }
 
@@ -32,19 +29,11 @@ public class Student {
         this.name = name;
     }
 
-    public void setIssues(List<Issue> issues) {
-        this.issues = issues;
-    }
-
     public String getUsn() {
         return usn;
     }
 
     public String getName() {
         return name;
-    }
-
-    public List<Issue> getIssues() {
-        return issues;
     }
 }

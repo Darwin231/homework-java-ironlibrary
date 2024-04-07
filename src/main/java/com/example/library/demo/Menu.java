@@ -52,10 +52,10 @@ public class Menu {
                     String authorName = scanner.nextLine();
                     System.out.println("Enter Author email: ");
                     String authorEmail = scanner.nextLine();
-                    Author bookAuthor = new Author(authorName,authorEmail);
 
                     // Add book to the repository
                     Book newBook = new Book(bookIsbn,bookTitle,bookCategory,bookQuantity);
+                    Author bookAuthor = new Author(authorName,authorEmail,newBook);
                     libraryService.addBook(newBook);
 
                     System.out.println("Book successfully added to IronLibrary.");
