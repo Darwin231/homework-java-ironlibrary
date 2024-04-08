@@ -2,6 +2,8 @@ package com.example.library.demo.model;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "book")
 public class Book {
@@ -81,8 +83,20 @@ public class Book {
         this.author = author;
     }
 
-    //toString
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return Objects.equals(isbn, book.isbn) && Objects.equals(title, book.title) && Objects.equals(category, book.category) && Objects.equals(quantity, book.quantity) && Objects.equals(author, book.author);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(isbn, title, category, quantity, author);
+    }
+
+    //toString
     @Override
     public String toString() {
         return "Book{" +
