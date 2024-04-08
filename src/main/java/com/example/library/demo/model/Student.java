@@ -3,6 +3,7 @@ package com.example.library.demo.model;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "student")
@@ -49,5 +50,18 @@ public class Student {
 
     public void addIssue(Issue newIssue) {
         this.issues.add(newIssue);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return Objects.equals(usn, student.usn) && Objects.equals(name, student.name) && Objects.equals(issues, student.issues);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(usn, name, issues);
     }
 }

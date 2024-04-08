@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.springframework.cglib.core.Local;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Table(name = "issue")
@@ -71,5 +72,18 @@ public class Issue {
 
     public void setIssueBook(Book issueBook) {
         this.issueBook = issueBook;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Issue issue = (Issue) o;
+        return Objects.equals(issueId, issue.issueId) && Objects.equals(issueDate, issue.issueDate) && Objects.equals(returnDate, issue.returnDate) && Objects.equals(issueStudent, issue.issueStudent) && Objects.equals(issueBook, issue.issueBook);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(issueId, issueDate, returnDate, issueStudent, issueBook);
     }
 }
