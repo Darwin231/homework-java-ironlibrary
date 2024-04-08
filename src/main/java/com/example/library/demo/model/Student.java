@@ -8,7 +8,6 @@ import java.util.List;
 @Table(name = "student")
 public class Student {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String usn;
     @Column(name = "student_name")
     private String name;
@@ -19,8 +18,9 @@ public class Student {
     public Student() {
     }
 
-    public Student(String name) {
-        this.name = name;
+    public Student(String usn, String name) {
+        setUsn(usn);
+        setName(name);
     }
 
     public void setUsn(String usn) {
@@ -45,5 +45,9 @@ public class Student {
 
     public List<Issue> getIssues() {
         return issues;
+    }
+
+    public void addIssue(Issue newIssue) {
+        this.issues.add(newIssue);
     }
 }

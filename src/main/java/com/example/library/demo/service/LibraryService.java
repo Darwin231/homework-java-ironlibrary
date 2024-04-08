@@ -70,8 +70,12 @@ public class LibraryService {
         return studentRepository.findByUsn(usn);
     }
 
-    public Optional<List<Student>> findAllStudentsByStudentName(String name) {
-        return studentRepository.findAllByName(name);
+    public Optional<Student> findStudentByName(String name) {
+        return studentRepository.findByName(name);
+    }
+
+    public void addStudent (Student student) {
+        studentRepository.save(student);
     }
 
     public List<Book> findBooksByAuthor(Author author){
