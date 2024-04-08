@@ -82,6 +82,10 @@ public class LibraryService {
         return bookRepository.findAllByAuthor(author.getAuthorId());
     }
 
+    // Issue Repository
+    public void addIssue (Issue issue) {
+        issueRepository.save(issue);
+    }
     /*public List<Book> findByUsn(Student student){
         return bookRepository.findAllByUsn(student.getUsn());
     }*/
