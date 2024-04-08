@@ -86,4 +86,8 @@ public class Issue {
     public int hashCode() {
         return Objects.hash(issueId, issueDate, returnDate, issueStudent, issueBook);
     }
+
+    public void printIssueInfo() {
+        System.out.printf("%-20s %-20s %-15s\n", issueBook.getTitle(), issueStudent.getName(), returnDate);
+    }
 }
