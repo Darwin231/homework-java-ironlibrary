@@ -1,6 +1,9 @@
 package com.example.library.demo.model;
 
 import jakarta.persistence.*;
+import org.springframework.cglib.core.Local;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "issue")
@@ -8,8 +11,8 @@ public class Issue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer issueId;
-    private String issueDate;
-    private String returnDate;
+    private LocalDateTime issueDate;
+    private LocalDateTime returnDate;
 
     @ManyToOne
     @JoinColumn(name = "student_usn", referencedColumnName = "usn")
@@ -23,9 +26,11 @@ public class Issue {
     public Issue() {
     }
 
-    public Issue(String issueDate, String returnDate, Student issueStudent, Book issueBook) {
+    public Issue(LocalDateTime issueDate, LocalDateTime returnDate, Student issueStudent, Book issueBook) {
         setIssueDate(issueDate);
         setReturnDate(returnDate);
+        setIssueStudent(issueStudent);
+        setIssueBook(issueBook);
     }
 
     public Integer getIssueId() {
@@ -36,19 +41,19 @@ public class Issue {
         this.issueId = issueId;
     }
 
-    public String getIssueDate() {
+    public LocalDateTime getIssueDate() {
         return issueDate;
     }
 
-    public void setIssueDate(String issueDate) {
+    public void setIssueDate(LocalDateTime issueDate) {
         this.issueDate = issueDate;
     }
 
-    public String getReturnDate() {
+    public LocalDateTime getReturnDate() {
         return returnDate;
     }
 
-    public void setReturnDate(String returnDate) {
+    public void setReturnDate(LocalDateTime returnDate) {
         this.returnDate = returnDate;
     }
 

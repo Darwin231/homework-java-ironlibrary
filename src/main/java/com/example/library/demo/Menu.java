@@ -2,14 +2,16 @@ package com.example.library.demo;
 
 import com.example.library.demo.model.Author;
 import com.example.library.demo.model.Book;
+import com.example.library.demo.model.Issue;
+import com.example.library.demo.model.Student;
 import com.example.library.demo.service.LibraryService;
 import com.fasterxml.jackson.core.JsonToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @Component
 public class Menu {
@@ -145,6 +147,43 @@ public class Menu {
                     break;
                 case 6:
                     // Call issueBookToStudent method
+                    // Ask for student usn and check if already exists
+                    System.out.println("Enter student usn: ");
+                    String studentUsn = scanner.nextLine();
+
+                    Student student;
+                    Optional<Student> studentOptional = libraryService.findStudentByUsn(studentUsn);
+                    if (!studentOptional.isPresent()) {
+                        System.out.println("Enter student name: ");
+                        String studentName = scanner.nextLine();
+                        student = new Student(studentUsn,studentName);
+                        libraryService.addStudent(student);
+                        System.out.println("New student added to the system!");
+                    } else {
+                        System.out.println("Student already in the system!");
+                        student = studentOptional.get();
+                    }
+
+                    // Ask for book to issue
+                    System.out.println("Enter book ISBN to issue: ");
+                    String bookIsbnIssue = scanner.nextLine();
+                    Optional<Book> optionalBook = libraryService.findBookByIsbn(bookIsbnIssue);
+                    if (optionalBook.isPresent()) {
+                        Book bookIssue = optionalBook.get();
+                        if (bookIssue.getQuantity() > 0) {
+                            LocalDateTime todayDate = LocalDateTime.now();
+                            LocalDateTime returnDate = todayDate.plusDays(7);
+                            Issue issue = new Issue(todayDate,returnDate,student,bookIssue);
+                            student.addIssue(issue);
+                            bookIssue.setQuantity(bookIssue.getQuantity()-1);
+                            libraryService.addBook(bookIssue);
+                            System.out.println("Book " + bookIssue.getTitle() + " issued to " + student.getName() + ". Return date: " + returnDate);
+                        } else {
+                            System.out.println("Sorry. The book with ISBN " + bookIsbnIssue + " (titled " + bookIssue.getTitle() + ") is not currently available.");
+                        }
+                    } else {
+                        System.out.println("Book with ISBN " + bookIsbnIssue + " not found.");
+                    }
                     break;
                 case 7:
                     // Call listBooksByUsn method
