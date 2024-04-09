@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface StudentRepository extends JpaRepository<Student, String> {
+    Student save(Student student);
     Optional<Student> findByUsn(String usn);
     Optional<Student> findByName(String name);
 }

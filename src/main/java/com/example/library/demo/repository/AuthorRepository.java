@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface AuthorRepository extends JpaRepository<Author, Integer> {
+    Author save(Author author);
     Optional<Author> findByAuthorId(int authorId);
     Optional<Author> findByName(String name);
 }

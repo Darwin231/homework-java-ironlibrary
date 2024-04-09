@@ -8,5 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface IssueRepository extends JpaRepository<Issue, Integer> {
+    Issue save(Issue issue);
     Optional<Issue> findByIssueId(int issueId);
 }

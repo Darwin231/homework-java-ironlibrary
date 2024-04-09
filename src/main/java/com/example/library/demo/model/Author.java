@@ -1,10 +1,13 @@
 package com.example.library.demo.model;
 
+import com.example.library.demo.Utils.Functions;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Entity
 @Table(name = "author")
@@ -49,8 +52,14 @@ public class Author {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        // email check
+        if(Functions.isValidEmail(email)){
+            this.email = email;
+        } else {
+            throw new IllegalArgumentException("Not a valid e-mail");
+        }
     }
+
 
     @Override
     public boolean equals(Object o) {

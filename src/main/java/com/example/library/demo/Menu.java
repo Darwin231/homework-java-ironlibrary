@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -41,48 +42,58 @@ public class Menu {
 
             switch (choice) {
                 case 1:
-                    // Ask for book info
-                    System.out.println("Enter ISBN: ");
-                    String bookIsbn = scanner.nextLine();
 
-                    // If book already exists, increment +1 in its quantity property
-                    Optional<Book> bookOptional = libraryService.findBookByIsbn(bookIsbn);
-                    if (bookOptional.isPresent()) {
-                        bookOptional.get().setQuantity(bookOptional.get().getQuantity() + 1);
-                        libraryService.addBook(bookOptional.get());
-                        System.out.println("Book with indicated ISBN already known. Successfully added to IronLibrary!");
-                        break;
+                    try {
+                        // Ask for book info
+                        System.out.println("Enter ISBN: ");
+                        String bookIsbn = scanner.nextLine();
+
+                        // If book already exists, increment +1 in its quantity property
+                        Optional<Book> bookOptional = libraryService.findBookByIsbn(bookIsbn);
+                        if (bookOptional.isPresent()) {
+                            bookOptional.get().setQuantity(bookOptional.get().getQuantity() + 1);
+                            libraryService.addBook(bookOptional.get());
+                            System.out.println("Book with indicated ISBN already known. Successfully added to IronLibrary!");
+                            break;
+                        }
+
+                        System.out.println("Enter title: ");
+                        String bookTitle = scanner.nextLine();
+                        System.out.println("Enter category: ");
+                        String bookCategory = scanner.nextLine();
+                        System.out.println("Enter Author name: ");
+                        String authorName = scanner.nextLine();
+
+                        // Create author object and save it in repository (only if it does not already exist)
+                        Author bookAuthor;
+                        Optional<Author> authorOptional = libraryService.findAuthorByName(authorName);
+                        if (!authorOptional.isPresent()) {
+                            System.out.println("Enter Author email: ");
+                            String authorEmail = scanner.nextLine();
+                            bookAuthor = new Author(authorName,authorEmail);
+                            libraryService.addAuthor(bookAuthor);
+                        } else {
+                            System.out.println("Author information already in the system!");
+                            bookAuthor = authorOptional.get();
+                        }
+
+                        System.out.println("Enter number of books: ");
+                        int bookQuantity = scanner.nextInt();
+
+
+                        // Add book to the repository
+                        Book newBook = new Book(bookTitle,bookCategory,bookQuantity,bookAuthor);
+                        libraryService.addBook(newBook);
+
+                        System.out.println("New book successfully added to IronLibrary!");
+
+                    } catch (Exception e){
+                        System.out.println("ISBN needs to be a String");
+                        System.out.println(e.getMessage());
+                    } finally {
+                        scanner.close();
                     }
 
-                    System.out.println("Enter title: ");
-                    String bookTitle = scanner.nextLine();
-                    System.out.println("Enter category: ");
-                    String bookCategory = scanner.nextLine();
-                    System.out.println("Enter Author name: ");
-                    String authorName = scanner.nextLine();
-
-                    // Create author object and save it in repository (only if it does not already exist)
-                    Author bookAuthor;
-                    Optional<Author> authorOptional = libraryService.findAuthorByName(authorName);
-                    if (!authorOptional.isPresent()) {
-                        System.out.println("Enter Author email: ");
-                        String authorEmail = scanner.nextLine();
-                        bookAuthor = new Author(authorName,authorEmail);
-                        libraryService.addAuthor(bookAuthor);
-                    } else {
-                        System.out.println("Author information already in the system!");
-                        bookAuthor = authorOptional.get();
-                    }
-
-                    System.out.println("Enter number of books: ");
-                    int bookQuantity = scanner.nextInt();
-
-
-                    // Add book to the repository
-                    Book newBook = new Book(bookIsbn,bookTitle,bookCategory,bookQuantity,bookAuthor);
-                    libraryService.addBook(newBook);
-
-                    System.out.println("New book successfully added to IronLibrary!");
 
                     break;
                 case 2:
@@ -156,7 +167,7 @@ public class Menu {
                     if (!studentOptional.isPresent()) {
                         System.out.println("Enter student name: ");
                         String studentName = scanner.nextLine();
-                        student = new Student(studentUsn,studentName);
+                        student = new Student(studentName);
                         libraryService.addStudent(student);
                         System.out.println("New student added to the system!");
                     } else {

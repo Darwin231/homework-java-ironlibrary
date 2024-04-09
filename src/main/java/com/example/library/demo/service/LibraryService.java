@@ -28,13 +28,9 @@ public class LibraryService {
 
     // Book Repository
     public void addBook (Book book) {
-        Optional<Book> bookOptional = bookRepository.findByIsbn(book.getIsbn());
-        if (bookOptional.isPresent()) {
-            bookOptional.get().setQuantity(book.getQuantity()+1);
-            bookRepository.save(book);
-        }
         bookRepository.save(book);
     }
+
 
     public List<Book> listAllBooks() {
         return bookRepository.findAll();
@@ -85,5 +81,20 @@ public class LibraryService {
     /*public List<Book> findByUsn(Student student){
         return bookRepository.findAllByUsn(student.getUsn());
     }*/
+
+    public List<Book> findAllBooks(){
+        return bookRepository.findAll();
+    }
+
+    public void addIssue(Issue issue){
+        issueRepository.save(issue);
+    }
+
+    public void clean(){
+        studentRepository.deleteAll();
+        bookRepository.deleteAll();
+        issueRepository.deleteAll();
+        studentRepository.deleteAll();
+    }
 
 }

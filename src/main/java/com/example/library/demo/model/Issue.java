@@ -1,10 +1,8 @@
 package com.example.library.demo.model;
 
 import jakarta.persistence.*;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 @Entity
 @Table(name = "issue")
@@ -12,26 +10,26 @@ public class Issue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer issueId;
-    private LocalDateTime issueDate;
-    private LocalDateTime returnDate;
+    @Column(name = "issue_date")
+    private String issueDate;
+    @Column(name = "return_date")
+    private String returnDate;
 
     @ManyToOne
-    @JoinColumn(name = "student_usn", referencedColumnName = "usn")
+    @JoinColumn(name = "student_usn", referencedColumnName = "student_usn")
     private Student issueStudent;
     @OneToOne
-    @JoinColumn(name = "book_isbn", referencedColumnName = "isbn")
+    @JoinColumn(name = "book_isbn", referencedColumnName = "book_isbn")
     private Book issueBook;
 
 
 
-    public Issue() {
+    public Issue(LocalDateTime todayDate, LocalDateTime returnDate, Student student, Book bookIssue) {
     }
 
-    public Issue(LocalDateTime issueDate, LocalDateTime returnDate, Student issueStudent, Book issueBook) {
+    public Issue(String issueDate, String returnDate) {
         setIssueDate(issueDate);
         setReturnDate(returnDate);
-        setIssueStudent(issueStudent);
-        setIssueBook(issueBook);
     }
 
     public Integer getIssueId() {
@@ -42,19 +40,19 @@ public class Issue {
         this.issueId = issueId;
     }
 
-    public LocalDateTime getIssueDate() {
+    public String getIssueDate() {
         return issueDate;
     }
 
-    public void setIssueDate(LocalDateTime issueDate) {
+    public void setIssueDate(String issueDate) {
         this.issueDate = issueDate;
     }
 
-    public LocalDateTime getReturnDate() {
+    public String getReturnDate() {
         return returnDate;
     }
 
-    public void setReturnDate(LocalDateTime returnDate) {
+    public void setReturnDate(String returnDate) {
         this.returnDate = returnDate;
     }
 
@@ -72,18 +70,5 @@ public class Issue {
 
     public void setIssueBook(Book issueBook) {
         this.issueBook = issueBook;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Issue issue = (Issue) o;
-        return Objects.equals(issueId, issue.issueId) && Objects.equals(issueDate, issue.issueDate) && Objects.equals(returnDate, issue.returnDate) && Objects.equals(issueStudent, issue.issueStudent) && Objects.equals(issueBook, issue.issueBook);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(issueId, issueDate, returnDate, issueStudent, issueBook);
     }
 }

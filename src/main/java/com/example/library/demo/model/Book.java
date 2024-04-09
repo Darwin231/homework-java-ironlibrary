@@ -1,5 +1,6 @@
 package com.example.library.demo.model;
 
+import com.example.library.demo.Utils.Functions;
 import jakarta.persistence.*;
 
 import java.util.Objects;
@@ -8,9 +9,13 @@ import java.util.Objects;
 @Table(name = "book")
 public class Book {
     @Id
+    @Column(name = "book_isbn")
     private String isbn;
+    @Column(name = "title")
     private String title;
+    @Column(name = "category")
     private String category;
+    @Column(name = "quantity")
     private Integer quantity;
 
     @ManyToOne
@@ -19,8 +24,8 @@ public class Book {
 
 
     //Parametrized constructor
-    public Book(String isbn, String title, String category, Integer quantity, Author author) {
-        setIsbn(isbn);
+    public Book(String title, String category, Integer quantity, Author author) {;
+        setIsbn();
         setTitle(title);
         setCategory(category);
         setQuantity(quantity);
@@ -35,20 +40,8 @@ public class Book {
         return isbn;
     }
 
-    public void setIsbn(String isbn) {
-        if (isbn == null || isbn.isEmpty()) {
-            throw new IllegalArgumentException("ISBN cannot be null or empty");
-        }
-
-        // Remove any hyphens or spaces from the ISBN
-        isbn = isbn.replaceAll("[\\s-]+", "");
-
-        //Check whether ISBN-10 or ISBN-13
-        if (!isbn.matches("\\d{10}") && !isbn.matches("\\d{13}")) {
-            throw new IllegalArgumentException("Invalid ISBN format");
-        }
-
-        this.isbn = isbn;
+    public void setIsbn() {
+        this.isbn = Functions.generateISBN();
     }
 
     public String getTitle() {
@@ -72,7 +65,10 @@ public class Book {
     }
 
     public void setQuantity(Integer quantity) {
+        if (Functions.isValidQuantity(quantity)){
         this.quantity = quantity;
+        } else {
+        throw new IllegalArgumentException("Quantity cannot be negative");}
     }
 
     public Author getAuthor() {
