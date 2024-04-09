@@ -84,7 +84,7 @@ public class Menu {
 
 
                             // Add book to the repository
-                            Book newBook = new Book("978-7-7529-4912-2", bookTitle, bookCategory, bookQuantity, bookAuthor);
+                            Book newBook = new Book(bookIsbn, bookTitle, bookCategory, bookQuantity, bookAuthor);
                             libraryService.addBook(newBook);
 
                             System.out.println("New book successfully added to IronLibrary!");
