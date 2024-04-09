@@ -11,9 +11,9 @@ public class Issue {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer issueId;
     @Column(name = "issue_date")
-    private String issueDate;
+    private LocalDateTime issueDate;
     @Column(name = "return_date")
-    private String returnDate;
+    private LocalDateTime returnDate;
 
     @ManyToOne
     @JoinColumn(name = "student_usn", referencedColumnName = "student_usn")
@@ -40,19 +40,19 @@ public class Issue {
         this.issueId = issueId;
     }
 
-    public String getIssueDate() {
+    public LocalDateTime getIssueDate() {
         return issueDate;
     }
 
-    public void setIssueDate(String issueDate) {
+    public void setIssueDate(LocalDateTime issueDate) {
         this.issueDate = issueDate;
     }
 
-    public String getReturnDate() {
+    public LocalDateTime getReturnDate() {
         return returnDate;
     }
 
-    public void setReturnDate(String returnDate) {
+    public void setReturnDate(LocalDateTime returnDate) {
         this.returnDate = returnDate;
     }
 
