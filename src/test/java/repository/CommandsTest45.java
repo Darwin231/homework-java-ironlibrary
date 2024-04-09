@@ -17,6 +17,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,8 +45,8 @@ public class CommandsTest45 {
         MockitoAnnotations.openMocks(this);
         author = new Author("Darwin", "darwin@email.com");
         book = new Book("978-7-7529-4912-2", "title_test", "Horror", 1, author);
-        issue = new Issue("12/12/2023", "14/12/2023");
         student = new Student("Laura");
+        issue = new Issue(LocalDateTime.now(), LocalDateTime.now().plusDays(7),student,book);
         libraryService = new LibraryService(authorRepository, bookRepository, issueRepository, studentRepository);
     }
 

@@ -25,11 +25,13 @@ public class Issue {
 
 
     public Issue(LocalDateTime todayDate, LocalDateTime returnDate, Student student, Book bookIssue) {
+        setIssueDate(todayDate);
+        setReturnDate(returnDate);
+        setIssueStudent(student);
+        setIssueBook(bookIssue);
     }
 
-    public Issue(String issueDate, String returnDate) {
-        setIssueDate(issueDate);
-        setReturnDate(returnDate);
+    public Issue() {
     }
 
     public Integer getIssueId() {
