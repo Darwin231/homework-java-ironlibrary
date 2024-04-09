@@ -4,11 +4,13 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Table(name = "student")
 public class Student {
     @Id
+    @Column(name = "student_usn")
     private String usn;
     @Column(name = "student_name")
     private String name;
@@ -19,13 +21,13 @@ public class Student {
     public Student() {
     }
 
-    public Student(String usn, String name) {
-        setUsn(usn);
+    public Student(String name) {
+        setUsn();
         setName(name);
     }
 
-    public void setUsn(String usn) {
-        this.usn = usn;
+    public void setUsn() {
+        this.usn = UUID.randomUUID().toString();
     }
 
     public void setName(String name) {
