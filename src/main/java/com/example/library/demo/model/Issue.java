@@ -71,4 +71,8 @@ public class Issue {
     public void setIssueBook(Book issueBook) {
         this.issueBook = issueBook;
     }
+
+    public void printIssueInfo() {
+        System.out.printf("%-20s %-20s %-15s\n", issueBook.getTitle(), issueStudent.getName(), returnDate);
+    }
 }

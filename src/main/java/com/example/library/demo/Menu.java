@@ -184,6 +184,7 @@ public class Menu {
                                 LocalDateTime todayDate = LocalDateTime.now();
                                 LocalDateTime returnDate = todayDate.plusDays(7);
                                 Issue issue = new Issue(todayDate, returnDate, student, bookIssue);
+                                libraryService.addIssue(issue);
                                 student.addIssue(issue);
                                 bookIssue.setQuantity(bookIssue.getQuantity() - 1);
                                 libraryService.addBook(bookIssue);
@@ -196,7 +197,28 @@ public class Menu {
                         }
                         break;
                     case 7:
-                        // Call listBooksByUsn method
+                        // Ask for student usn and check if already exists
+                        System.out.println("Enter student usn: ");
+                        String studentUsn2 = scanner.nextLine();
+
+                        Student student2;
+                        Optional<Student> studentOptional2 = libraryService.findStudentByUsn(studentUsn2);
+                        if (!studentOptional2.isPresent()) {
+                            System.out.println("Student with usn " + studentUsn2 + " not found.");
+                            break;
+                        } else {
+                            student2 = studentOptional2.get();
+                            List<Issue> studentIssues = student2.getIssues();
+                            if (studentIssues.isEmpty()) {
+                                System.out.println("Student " + student2.getName() + " has no issued books.");
+                            } else {
+                                System.out.println(student2.getName() + "'s issued books: ");
+                                System.out.println("Book Title          Student Name         Return date");
+                                for (Issue issue : studentIssues) {
+                                    issue.printIssueInfo();
+                                }
+                            }
+                        }
                         break;
                     case 8:
                         System.out.println("Exiting program.");

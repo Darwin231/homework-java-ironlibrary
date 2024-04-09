@@ -15,7 +15,7 @@ public class Student {
     @Column(name = "student_name")
     private String name;
 
-    @OneToMany(mappedBy = "issueStudent", orphanRemoval = true)
+    @OneToMany(mappedBy = "issueStudent", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<Issue> issues = new ArrayList<>();
 
     public Student() {
