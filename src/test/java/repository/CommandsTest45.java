@@ -43,7 +43,7 @@ public class CommandsTest45 {
     public void setUp(){
         MockitoAnnotations.openMocks(this);
         author = new Author("Darwin", "darwin@email.com");
-        book = new Book("title_test", "Horror", 1, author);
+        book = new Book("978-7-7529-4912-2", "title_test", "Horror", 1, author);
         issue = new Issue("12/12/2023", "14/12/2023");
         student = new Student("Laura");
         libraryService = new LibraryService(authorRepository, bookRepository, issueRepository, studentRepository);

@@ -24,8 +24,8 @@ public class Book {
 
 
     //Parametrized constructor
-    public Book(String title, String category, Integer quantity, Author author) {;
-        setIsbn();
+    public Book(String isbn, String title, String category, Integer quantity, Author author) {;
+        setIsbn(isbn);
         setTitle(title);
         setCategory(category);
         setQuantity(quantity);
@@ -40,8 +40,11 @@ public class Book {
         return isbn;
     }
 
-    public void setIsbn() {
-        this.isbn = Functions.generateISBN();
+    public void setIsbn(String isbn) {
+        if (isbn.substring(2) == "978" & (isbn.length() >= 14 | isbn.length() <= 17)) {
+            this.isbn = isbn;
+        } else {throw new IllegalArgumentException("ISBN cannot be null or empty");}
+
     }
 
     public String getTitle() {
